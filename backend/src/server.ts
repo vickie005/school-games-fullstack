@@ -5,6 +5,7 @@ import { rateLimiterMiddleware } from './config/rate-limiter';
 import db from './drizzle/db';
 import { users } from './drizzle/schema';
 import cors from 'cors';
+import AuthRouter from './auth/auth.router';
 
 
 const initilizeApp = () => {
@@ -37,8 +38,8 @@ const initilizeApp = () => {
     }
   });
 
-  // routes
-  // app.use('/auth', AuthRouter);
+  // Mount auth routes
+  app.use('/api/auth', AuthRouter);
 
   app.get('/', (req, res) => {
     res.send('Hello, World!');

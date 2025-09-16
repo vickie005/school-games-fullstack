@@ -17,3 +17,10 @@ export const users = pgTable('users', {
   updatedAt: timestamp('updated_at').defaultNow(),
   lastLoginAt: timestamp('last_login_at'),
 });
+
+// infer types
+export type TIUser = typeof users.$inferInsert
+export type TSUser = typeof users.$inferSelect
+
+// Type aliases for better readability
+export type User = TSUser

@@ -1,1 +1,215 @@
+### Test Database Connection
 GET http://localhost:3000/test-db
+
+### ===========================================
+### USER REGISTRATION TESTS
+### ===========================================
+
+### Register Regular User
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "fullname": "Vic John",
+  "email": "john.vic@example.com",
+  "phoneNumber": "+254734567890",
+  "password": "password123",
+  "role": "user"
+}
+
+### Register Admin User
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "fullname": "Jane Admin",
+  "email": "jane.admin@example.com",
+  "phoneNumber": "+1234567891",
+  "password": "admin123",
+  "role": "admin"
+}
+
+### Register Superadmin User
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "fullname": "Super Admin",
+  "email": "super.admin@example.com",
+  "phoneNumber": "+1234567892",
+  "password": "super123",
+  "role": "superadmin"
+}
+
+### Register User with Invalid Data (should fail)
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "fullname": "",
+  "email": "invalid-email",
+  "phoneNumber": "123",
+  "password": "123",
+  "role": "invalid-role"
+}
+
+### ===========================================
+### USER LOGIN TESTS
+### ===========================================
+
+### Login as Regular User
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "john.vic@example.com",
+  "password": "password123"
+}
+
+### Login as Admin User
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "jane.admin@example.com",
+  "password": "admin123"
+}
+
+### Login as Superadmin User
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "super.admin@example.com",
+  "password": "super123"
+}
+
+### Login with Invalid Credentials (should fail)
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "nonexistent@example.com",
+  "password": "wrongpassword"
+}
+
+### ===========================================
+### AUTHENTICATED ROUTES TESTS
+### ===========================================
+
+### Get User Profile (any authenticated user)
+GET http://localhost:3000/api/auth/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJfaWQiOjEsImZ1bGxuYW1lIjoiVmljIEpvaG4iLCJlbWFpbCI6ImpvaG4udmljQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJleHAiOjE3NTgxNDMwNDMsImlhdCI6MTc1ODA1NjY0M30.YYeq3JRTTL3xXibK1CS8VaKq11TGRf5kPIKD7Fa8yBw
+
+### Get All Users (admin or superadmin only)
+GET http://localhost:3000/api/auth/users
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+### Get User by ID (admin or superadmin only)
+GET http://localhost:3000/api/auth/users/1
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+### Update User by ID (admin or superadmin only)
+PUT http://localhost:3000/api/auth/users/1
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+Content-Type: application/json
+
+{
+  "fullname": "John Updated",
+  "phoneNumber": "+1234567899",
+  "role": "admin"
+}
+
+### Deactivate User (superadmin only)
+POST http://localhost:3000/api/auth/users/1/deactivate
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+### ===========================================
+### ROLE-BASED ACCESS TESTS
+### ===========================================
+
+### Test Regular User Access to Admin Routes (should fail)
+GET http://localhost:3000/api/auth/users
+Authorization: Bearer REGULAR_USER_JWT_TOKEN
+
+### Test Admin Access to Superadmin Routes (should fail)
+POST http://localhost:3000/api/auth/users/1/deactivate
+Authorization: Bearer ADMIN_JWT_TOKEN
+
+### Test Disabled User Access (should fail)
+GET http://localhost:3000/api/auth/profile
+Authorization: Bearer DISABLED_USER_JWT_TOKEN
+
+### ===========================================
+### ERROR HANDLING TESTS
+### ===========================================
+
+### Test with Expired Token
+GET http://localhost:3000/api/auth/profile
+Authorization: Bearer EXPIRED_JWT_TOKEN
+
+### Test with Invalid Token
+GET http://localhost:3000/api/auth/profile
+Authorization: Bearer invalid.token.here
+
+### Test without Token
+GET http://localhost:3000/api/auth/profile
+
+### Test with Malformed Authorization Header
+GET http://localhost:3000/api/auth/profile
+Authorization: InvalidFormat token
+
+### ===========================================
+### BULK USER CREATION FOR TESTING
+### ===========================================
+
+### Create Multiple Test Users
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "fullname": "Test User 1",
+  "email": "test1@example.com",
+  "phoneNumber": "+1111111111",
+  "password": "test123",
+  "role": "user"
+}
+
+###
+
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "fullname": "Test User 2",
+  "email": "test2@example.com",
+  "phoneNumber": "+2222222222",
+  "password": "test123",
+  "role": "user"
+}
+
+###
+
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "fullname": "Test Admin",
+  "email": "testadmin@example.com",
+  "phoneNumber": "+3333333333",
+  "password": "test123",
+  "role": "admin"
+}
+
+###
+
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "fullname": "Disabled User",
+  "email": "disabled@example.com",
+  "phoneNumber": "+4444444444",
+  "password": "test123",
+  "role": "disabled"
+}
