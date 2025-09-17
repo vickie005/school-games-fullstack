@@ -72,6 +72,87 @@ npm run dev # Test locally
 git commit -m "feat: add webhook validation middleware"
 ```
 
+## 📌 Project Contribution Guidelines (School Games Website)
+
+- Ensure the project runs fully after cloning (both backend and frontend) before starting work.
+- Work on your own branch. Branch naming format:
+  - `github-username/feature-name`
+  - Example: `vickie005/auth-login-flow`
+
+### Common Git Commands
+
+- Check current branch before coding:
+```bash
+git status
+git branch --show-current
+```
+
+- Fetch or pull latest changes from `main`:
+```bash
+# Fetch updates from origin without merging
+git fetch origin
+
+# Update local main
+git checkout main
+git pull origin main
+
+# Rebase your branch on latest main (recommended)
+git checkout your-branch
+git rebase origin/main
+```
+
+- Create and switch to a new branch:
+```bash
+git checkout -b github-username/feature-name
+```
+
+### Main Branch Protection
+
+- Do NOT push directly to `main`.
+- All changes must go through Pull Requests.
+- Only reviewed and approved code is merged into `main`.
+
+## ✅ Getting the Project Running After Clone
+
+Follow these quick steps to get both services running locally.
+
+### Root (Monorepo)
+```bash
+pnpm install
+```
+
+### Backend (API)
+```bash
+cd backend
+
+# 1) Install dependencies
+pnpm install
+
+# 2) Configure environment variables
+# Create .env and fill required values (DB connection, JWT_SECRET, etc.)
+copy .env.example .env  # Windows
+cp .env.example .env    # macOS/Linux
+
+# 3) (Optional) Run database migrations once DB is ready
+pnpm migrate
+
+# 4) Start the server (dev mode)
+pnpm dev
+```
+
+### Frontend (Web App)
+```bash
+cd frontend
+
+# 1) Install dependencies
+pnpm install
+
+# 2) Start the dev server
+pnpm dev
+
+# The app will be available on http://localhost:3000 by default
+```
+
 ### 3. Submit PR
 
 - Push to your fork
