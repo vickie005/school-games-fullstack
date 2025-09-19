@@ -1,1 +1,103 @@
 @import "tailwindcss";
+
+/* School Games Color Theme */
+:root {
+  /* Primary Colors */
+  --primary-blue: #001A6E;
+  --primary-blue-dark: #00104A;
+  --primary-blue-light: #074799;
+  
+  /* Secondary Colors */
+  --secondary-teal: #009990;
+  --secondary-teal-dark: #007A73;
+  --secondary-teal-light: #00B3A6;
+  
+  /* Accent Colors */
+  --accent-lime: #E1FFBB;
+  --accent-lime-dark: #D4F5A0;
+  --accent-lime-light: #F0FFD6;
+  
+  /* Neutral Colors */
+  --neutral-white: #ffffff;
+  --neutral-gray-50: #f9fafb;
+  --neutral-gray-100: #f3f4f6;
+  --neutral-gray-900: #111827;
+  
+  /* Background Gradients */
+  --bg-gradient-primary: linear-gradient(135deg, #E1FFBB 0%, #009990 100%);
+  --bg-gradient-secondary: linear-gradient(135deg, #074799 0%, #001A6E 100%);
+  --bg-gradient-accent: linear-gradient(135deg, #E1FFBB 0%, #00B3A6 50%, #074799 100%);
+}
+
+/* Custom utility classes */
+.bg-school-gradient {
+  background: var(--bg-gradient-primary);
+}
+
+.bg-school-gradient-strong {
+  background: var(--bg-gradient-secondary);
+}
+
+.bg-school-gradient-accent {
+  background: var(--bg-gradient-accent);
+}
+
+.text-primary-blue {
+  color: var(--primary-blue);
+}
+
+.text-secondary-teal {
+  color: var(--secondary-teal);
+}
+
+.text-accent-lime {
+  color: var(--accent-lime);
+}
+
+.bg-primary-blue {
+  background-color: var(--primary-blue);
+}
+
+.bg-secondary-teal {
+  background-color: var(--secondary-teal);
+}
+
+.bg-accent-lime {
+  background-color: var(--accent-lime);
+}
+
+.border-primary-blue {
+  border-color: var(--primary-blue);
+}
+
+.border-secondary-teal {
+  border-color: var(--secondary-teal);
+}
+
+.border-accent-lime {
+  border-color: var(--accent-lime);
+}
+
+/* Hover effects */
+.hover-primary-blue:hover {
+  background-color: var(--primary-blue-dark);
+}
+
+.hover-secondary-teal:hover {
+  background-color: var(--secondary-teal-dark);
+}
+
+.hover-accent-lime:hover {
+  background-color: var(--accent-lime-dark);
+}
+
+/* Global styles */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background: var(--bg-gradient-primary);
+}
+
+/* Smooth transitions */
+* {
+  transition: all 0.2s ease-in-out;
+}
