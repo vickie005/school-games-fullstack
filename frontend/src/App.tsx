@@ -6,6 +6,7 @@ import Homepage from './pages/Homepage';
 import AboutPage from './pages/AboutPage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
+import Dashboard from './pages/Dashboard';
 import TournamentsPage from './pages/TournamentsPage';
 import Footer from './components/Footer';
 
@@ -20,6 +21,7 @@ function App() {
           <Route path="/tournaments" element={<TournamentsPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </main>
       <Footer />
