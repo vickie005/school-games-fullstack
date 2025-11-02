@@ -118,11 +118,11 @@ const RegisterPage: React.FC = () => {
     if (/\d/.test(password)) strength += 1;
     
     const strengths = [
-      { label: "Very Weak", color: "bg-red-500" },
-      { label: "Weak", color: "bg-orange-500" },
-      { label: "Fair", color: "bg-yellow-500" },
-      { label: "Good", color: "bg-teal-500" },
-      { label: "Strong", color: "bg-green-500" }
+      { strength: 0, label: "Very Weak", color: "bg-red-500" },
+      { strength: 1, label: "Weak", color: "bg-orange-500" },
+      { strength: 2, label: "Fair", color: "bg-yellow-500" },
+      { strength: 3, label: "Good", color: "bg-teal-500" },
+      { strength: 4, label: "Strong", color: "bg-green-500" }
     ];
     
     return strengths[strength] || strengths[0];
