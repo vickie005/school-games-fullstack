@@ -1,16 +1,3 @@
-// import React from "react";
-// import RegisterForm from "../features/Register/RegisterForm";
-
-// const RegisterPage: React.FC = () => {
-//   return (
-//     <div className="min-h-screen bg-gray-50 flex justify-center items-center">
-//       <RegisterForm />
-//     </div>
-//   );
-// };
-
-// export default RegisterPage;
-
 import { Link } from "react-router-dom";
 import registerAnimation from "../../src/assets/login-animation.json";
 import Lottie from "lottie-react";
@@ -108,14 +95,14 @@ const RegisterPage: React.FC = () => {
   };
 
   // Password strength indicator
-  const getPasswordStrength = (password: string) => {
+  const getPasswordStrength = (password: string): { strength: number; label: string; color: string } => {
     if (!password) return { strength: 0, label: "", color: "" };
     
-    let strength = 0;
-    if (password.length >= 6) strength += 1;
-    if (/[a-z]/.test(password)) strength += 1;
-    if (/[A-Z]/.test(password)) strength += 1;
-    if (/\d/.test(password)) strength += 1;
+    let strengthLevel = 0;
+    if (password.length >= 6) strengthLevel += 1;
+    if (/[a-z]/.test(password)) strengthLevel += 1;
+    if (/[A-Z]/.test(password)) strengthLevel += 1;
+    if (/\d/.test(password)) strengthLevel += 1;
     
     const strengths = [
       { label: "Very Weak", color: "bg-red-500" },
@@ -125,7 +112,8 @@ const RegisterPage: React.FC = () => {
       { label: "Strong", color: "bg-green-500" }
     ];
     
-    return strengths[strength] || strengths[0];
+    const strengthInfo = strengths[strengthLevel] || strengths[0];
+    return { strength: strengthLevel, ...strengthInfo };
   };
 
   const passwordStrength = getPasswordStrength(passwordValue);
