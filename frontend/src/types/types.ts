@@ -11,7 +11,7 @@ export interface TSAuth {
     is_deleted: boolean;
 }
 
-// Updated User interface to match database schema
+// User interface to match database schema
 export interface User {
     id: number;
     fullname: string;
